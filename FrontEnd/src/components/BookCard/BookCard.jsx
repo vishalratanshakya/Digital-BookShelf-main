@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from "axios"
 import OrderSidebar from '../OrderSidebar/OrderSidebar'
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const BookCard = ({data , Favourite, clickable = true}) => { //data here is the book details
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -18,7 +19,7 @@ const BookCard = ({data , Favourite, clickable = true}) => { //data here is the 
   const handleRemoveBook = async () => {
     try {
       await axios.put(
-        "http://localhost:1000/api/v1/remove-book-from-favourite",
+        `${BACKEND_URL}/api/v1/remove-book-from-favourite`,
         {},
         { headers }
       );
@@ -45,7 +46,7 @@ const BookCard = ({data , Favourite, clickable = true}) => { //data here is the 
 
     try {
       const response = await axios.put(
-        "http://localhost:1000/api/v1/add-to-cart",
+        `${BACKEND_URL}/api/v1/add-to-cart`,
         {},
         { headers }
       );
@@ -72,8 +73,8 @@ const BookCard = ({data , Favourite, clickable = true}) => { //data here is the 
 
     try {
       const url = isFavorite
-        ? "http://localhost:1000/api/v1/remove-book-from-favourite"
-        : "http://localhost:1000/api/v1/add-book-to-favourite";
+        ? `${BACKEND_URL}/api/v1/remove-book-from-favourite`
+        : `${BACKEND_URL}/api/v1/add-book-to-favourite`;
 
       await axios.put(url, {}, { headers });
 

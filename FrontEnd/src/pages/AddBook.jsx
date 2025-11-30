@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const AddBook = () => {
     
         const navigate = useNavigate()
@@ -33,7 +34,7 @@ const AddBook = () => {
                 ){
                     alert("All feilds are required")
                 } else{
-                    const response = await axios.post("http://localhost:1000/api/v1/add-book",
+                    const response = await axios.post(`${BACKEND_URL}/api/v1/add-book`,
                         Data,
                         {headers}
                     )

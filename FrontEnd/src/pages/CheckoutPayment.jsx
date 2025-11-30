@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaCcVisa, FaCcMastercard, FaCcAmex, FaLock } from 'react-icons/fa';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CheckoutPayment = () => {
   const navigate = useNavigate();
   const [checkoutData, setCheckoutData] = useState(null);
@@ -123,7 +125,7 @@ const CheckoutPayment = () => {
     try {
       setPlacing(true);
       const response = await axios.post(
-        'http://localhost:1000/api/v1/place-order',
+        `${BACKEND_URL}/api/v1/place-order`,
         { order: checkoutData.cart },
         { headers }
       );

@@ -2,6 +2,8 @@ import React, { useEffect , useState} from 'react'
 import axios from "axios"
 import Loader from "../Loader/Loader"
 import { Link, useNavigate } from 'react-router-dom' 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const UserOrderHistory = () => {
   const  [OrderHistory, setOrderHistory] = useState()
   const navigate = useNavigate()
@@ -14,7 +16,7 @@ const UserOrderHistory = () => {
           authorization : `Bearer ${localStorage.getItem("token")}`,
         }
         
-        const response = await axios.get("http://localhost:1000/api/v1/get-order-history", 
+        const response = await axios.get(`${BACKEND_URL}/api/v1/get-order-history`, 
           {headers})
         setOrderHistory(response.data.data)
       } catch (error) {
@@ -45,7 +47,7 @@ const UserOrderHistory = () => {
 	  const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
 	  if (!confirmCancel) return;
 	  try {
-	    await axios.delete(`http://localhost:1000/api/v1/delete-order/${orderId}`, { headers });
+	    await axios.delete(`${BACKEND_URL}/api/v1/delete-order/${orderId}`, { headers });
 	    setOrderHistory((prev) =>
 	      prev.map((o) =>
 	        o._id === orderId

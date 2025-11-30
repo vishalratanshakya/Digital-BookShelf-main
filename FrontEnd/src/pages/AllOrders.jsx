@@ -7,6 +7,8 @@ import Loader from '../components/Loader/Loader'
 import { FaUserSecret } from "react-icons/fa";
 import SeeUserData from "./SeeUserData"
 import { IoOpenOutline } from "react-icons/io5";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const AllOrders = () => {
   const [AllOrders, setAllOrders] = useState()
   const [loading, setLoading] = useState(true)
@@ -25,7 +27,7 @@ const AllOrders = () => {
         setLoading(true)
         setError("")
         const response = await axios.get(
-          "http://localhost:1000/api/v1/get-all-orders",
+          `${BACKEND_URL}/api/v1/get-all-orders`,
           { headers }
         )
         setAllOrders(response.data.data || [])
@@ -49,7 +51,7 @@ const AllOrders = () => {
     try {
       const id = AllOrders[i]._id
       const response = await axios.put(
-        `http://localhost:1000/api/v1/update-status/${id}`,
+        `${BACKEND_URL}/api/v1/update-status/${id}`,
         Values,
         { headers }
       )

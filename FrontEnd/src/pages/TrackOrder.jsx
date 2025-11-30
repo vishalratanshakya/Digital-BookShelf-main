@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaCheckCircle } from 'react-icons/fa';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const steps = [
   'Order Placed',
   'Processing',
@@ -32,7 +34,7 @@ const TrackOrder = () => {
       setLoading(true);
       setError('');
       const response = await axios.get(
-        `http://localhost:1000/api/v1/get-order/${orderId}`,
+        `${BACKEND_URL}/api/v1/get-order/${orderId}`,
         { headers }
       );
       setOrder(response.data.data);

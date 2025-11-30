@@ -1,6 +1,8 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import Loader from '../Loader/Loader'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Settings = () => {
   const [Value, setValue] = useState({address : " "}) // yeh jo value hai iski madat se ham chage kr apaa rhw hai address of user
   const [ProfileData, setProfileData] = useState()
@@ -17,7 +19,7 @@ const Settings = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const response = await axios.get("http://localhost:1000/api/v1/get-user-information",{headers}
+      const response = await axios.get(`${BACKEND_URL}/api/v1/get-user-information`,{headers}
       )
       setProfileData(response.data)
       setValue({ address: response.data.address})// address change ho ssakta hai isloye naya adddress isse update ho jayega
@@ -26,7 +28,7 @@ const Settings = () => {
    }, [])
 
    const submitAddress = async() => {
-    const response = await axios.put("http://localhost:1000/api/v1/update-address", Value , {headers})
+    const response = await axios.put(`${BACKEND_URL}/api/v1/update-address`, Value , {headers})
     alert(response.data.message)
    }
    //we can change ONLY ADDRESS FOR user settings 

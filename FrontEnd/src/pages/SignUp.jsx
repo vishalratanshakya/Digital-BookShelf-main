@@ -2,6 +2,8 @@ import React , {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios"
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const SignUp = () => {
   const [Values,setValues] = useState({username:"",
      email: "",
@@ -25,7 +27,7 @@ const navigate = useNavigate()
               } else if(!passwordRegex.test(Values.password)){
                 alert("Password must be at least 8 characters, with one capital letter, lowercase letters and a special character")
               } else{
-                const response = await axios.post("http://localhost:1000/api/v1/sign-up" ,Values)// this is the thing that is sending data to the backend
+                const response = await axios.post(`${BACKEND_URL}/api/v1/sign-up` ,Values)// this is the thing that is sending data to the backend
                 alert(response.data.message)
                 navigate("/Login")
               }

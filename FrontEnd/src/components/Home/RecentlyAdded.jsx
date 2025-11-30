@@ -2,13 +2,14 @@ import React,{useEffect,useState} from 'react'
 import axios from "axios" //this hells to getch data from the backend
 import BookCard from '../BookCard/BookCard'
 import Loader from '../Loader/Loader'
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const RecentlyAdded = () => {
   const [Data, setData] = useState()
   useEffect(() => { 
     const fetch = async() => {
     try {
-      const response =  await axios.get("http://localhost:1000/api/v1/get-recent-books")
+      const response =  await axios.get(`${BACKEND_URL}/api/v1/get-recent-books`)
       setData(response.data.data)
     } catch (error) {
       console.log(error)

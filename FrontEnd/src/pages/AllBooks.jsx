@@ -6,6 +6,8 @@ import SidebarFilters from '../components/Filters/SidebarFiltersClean'
 import { FiMenu } from 'react-icons/fi'
 import { useLocation } from 'react-router-dom'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AllBooks = () => {
   const [Data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -57,8 +59,8 @@ const AllBooks = () => {
 
         const query = params.toString()
         const url = query
-          ? `http://localhost:1000/api/v1/get-all-books?${query}`
-          : "http://localhost:1000/api/v1/get-all-books"
+          ? `${BACKEND_URL}/api/v1/get-all-books?${query}`
+          : `${BACKEND_URL}/api/v1/get-all-books`
 
         const response =  await axios.get(url)
         const books = response.data.data || []

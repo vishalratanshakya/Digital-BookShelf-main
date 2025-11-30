@@ -6,6 +6,8 @@ import axios from "axios"
 import Loader from '../components/Loader/Loader'
 import MobileNav from '../components/Profile/MobileNav'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Profile = () => {
   const [Profile, setProfile] = useState()
   const [loading, setLoading] = useState(true)
@@ -29,7 +31,7 @@ const Profile = () => {
       try {
         setLoading(true)
         setError("")
-        const response = await axios.get("http://localhost:1000/api/v1/get-user-information", { headers })
+        const response = await axios.get(`${BACKEND_URL}/api/v1/get-user-information`, { headers })
         setProfile(response.data)
       } catch (error) {
         console.error("Error fetching profile:", error)

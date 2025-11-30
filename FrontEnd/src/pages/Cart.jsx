@@ -4,6 +4,8 @@ import axios from 'axios'
 import { TbHttpDelete } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Cart = () => {
  const Navigate = useNavigate() 
  const [Cart, setCart] = useState()
@@ -14,7 +16,7 @@ const Cart = () => {
 }
  useEffect(() => {
   const fetch = async () => {
-    const res = await axios.get("http://localhost:1000/api/v1/get-user-cart",
+    const res = await axios.get(`${BACKEND_URL}/api/v1/get-user-cart`,
       {headers}
     )
     setCart(res.data.data)
@@ -23,7 +25,7 @@ const Cart = () => {
  }, [Cart]) 
  const deleteItems = async (bookid) => {
 const response  = await axios.put(
-  `http://localhost:1000/api/v1/remove-from-cart/${bookid}`, {},{headers})
+  `${BACKEND_URL}/api/v1/remove-from-cart/${bookid}`, {},{headers})
   alert(response.data.message)
  }
 //  Total order price

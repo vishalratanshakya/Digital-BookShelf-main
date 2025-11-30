@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CheckoutSummary = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -68,7 +70,7 @@ const CheckoutSummary = () => {
       setDeleting(true);
       setError('');
       for (const ord of orders) {
-        await axios.delete(`http://localhost:1000/api/v1/delete-order/${ord._id}`, { headers });
+        await axios.delete(`${BACKEND_URL}/api/v1/delete-order/${ord._id}`, { headers });
       }
       clearCheckoutState();
       navigate('/');

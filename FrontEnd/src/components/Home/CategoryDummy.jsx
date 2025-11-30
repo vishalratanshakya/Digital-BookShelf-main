@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import BookCard from '../BookCard/BookCard';
 import Loader from '../Loader/Loader';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CategoryDummy = () => {
   const [englishBooks, setEnglishBooks] = useState([]);
@@ -17,8 +18,8 @@ const CategoryDummy = () => {
         setError("");
 
         const [engRes, hinRes] = await Promise.all([
-          axios.get("http://localhost:1000/api/v1/get-all-books?language=English"),
-          axios.get("http://localhost:1000/api/v1/get-all-books?language=Hindi"),
+          axios.get(`${BACKEND_URL}/api/v1/get-all-books?language=English`),
+          axios.get(`${BACKEND_URL}/api/v1/get-all-books?language=Hindi`),
         ]);
 
         setEnglishBooks(engRes.data.data || []);

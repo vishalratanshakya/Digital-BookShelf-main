@@ -1,6 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import axios from "axios"
 import { useParams, useNavigate } from 'react-router-dom'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const UpdateBook = () => {
     const [Data, setData] = useState({
         url: "",
@@ -35,7 +37,7 @@ const UpdateBook = () => {
             ){
                 alert("All feilds are required")
             } else{
-                const response = await axios.put("http://localhost:1000/api/v1/update-book",
+                const response = await axios.put(`${BACKEND_URL}/api/v1/update-book`,
                     Data,
                     {headers}
                 )
@@ -61,7 +63,7 @@ const UpdateBook = () => {
     }
     useEffect(() => { 
         const fetch = async() => {
-        const response =  await axios.get(`http://localhost:1000/api/v1/get-book-by-id/${id}`)
+        const response =  await axios.get(`${BACKEND_URL}/api/v1/get-book-by-id/${id}`)
        
         setData(response.data.data)
          }

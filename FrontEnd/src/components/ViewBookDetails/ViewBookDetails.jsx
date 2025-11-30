@@ -11,6 +11,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import OrderSidebar from '../OrderSidebar/OrderSidebar';
 import BookCard from "../BookCard/BookCard";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ViewDataDetails = () => {
    const {id} =  useParams()
@@ -29,7 +30,7 @@ const ViewDataDetails = () => {
      const fetch = async() => {
        try {
          setRelatedLoading(true)
-         const response =  await axios.get(`http://localhost:1000/api/v1/get-book-by-id/${id}`)
+         const response =  await axios.get(`${BACKEND_URL}/api/v1/get-book-by-id/${id}`)
          const book = response.data.data
          setData(book)
 
@@ -40,8 +41,8 @@ const ViewDataDetails = () => {
            }
            const query = params.toString()
            const url = query
-             ? `http://localhost:1000/api/v1/get-all-books?${query}`
-             : "http://localhost:1000/api/v1/get-all-books"
+             ? `${BACKEND_URL}/api/v1/get-all-books?${query}`
+             : `${BACKEND_URL}/api/v1/get-all-books`
 
            const relatedResponse = await axios.get(url)
            let list = relatedResponse.data.data || []
@@ -74,7 +75,7 @@ const ViewDataDetails = () => {
      }
      const handleFavourite = async() => {
        try {
-         await axios.put("http://localhost:1000/api/v1/add-book-to-favourite" , {}, {headers})
+         await axios.put(`${BACKEND_URL}/api/v1/add-book-to-favourite` , {}, {headers})
          const message = 'Added to your favourite';
          showToast(message)
        } catch (error) {
@@ -88,7 +89,7 @@ const ViewDataDetails = () => {
         return;
       }
 	   try {
-	     const response = await axios.put("http://localhost:1000/api/v1/add-to-cart" , {}, {headers})
+	     const response = await axios.put(`${BACKEND_URL}/api/v1/add-to-cart` , {}, {headers})
 	     const message = response.data?.message || 'Added to cart';
 	     showToast(message)
 	   } catch (error) {
@@ -116,7 +117,7 @@ const ViewDataDetails = () => {
 	 };
   
   const deleteBook = async () => {
-  const response =  await axios.delete ("http://localhost:1000/api/v1/delete-book" , {headers})
+  const response =  await axios.delete (`${BACKEND_URL}/api/v1/delete-book` , {headers})
   alert(response.data.message)
   navigate("/all-books")
   }

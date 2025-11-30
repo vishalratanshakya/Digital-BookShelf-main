@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useEffect} from "react"
 import axios from "axios"
 import BookCard from "../BookCard/BookCard"
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Favourites = () => {
   const [FavouriteBooks, setfavouriteBooks] = useState()
@@ -12,7 +13,7 @@ const Favourites = () => {
   }
   useEffect(() =>{
     const fetch = async ()=> {
-      const response = await axios.get("http://localhost:1000/api/v1/get-favourite-books",
+      const response = await axios.get(`${BACKEND_URL}/api/v1/get-favourite-books`,
          {headers}
         )
        setfavouriteBooks(response.data.data)

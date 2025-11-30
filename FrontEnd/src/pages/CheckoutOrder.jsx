@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IoMdArrowBack } from 'react-icons/io';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CheckoutOrder = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
@@ -67,7 +69,7 @@ const CheckoutOrder = () => {
 
       // Place order
       const response = await axios.post(
-        "http://localhost:1000/api/v1/place-order",
+        `${BACKEND_URL}/api/v1/place-order`,
         { order: [product] },
         { headers }
       );

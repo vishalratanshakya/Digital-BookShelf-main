@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios"
 import {authActions} from "../store/auth"
 import { useDispatch } from "react-redux"
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const LogIn = () => {
   const [Values,setValues] = useState({username:"",
     
@@ -20,7 +22,7 @@ const navigate = useNavigate()
              if(Values.username === "" || Values.password === "" ){
                alert("All Feilds Are Required To Be Filled!")
              } else{
-               const response = await axios.post("http://localhost:1000/api/v1/sign-in"
+               const response = await axios.post(`${BACKEND_URL}/api/v1/sign-in`
                  ,Values)// this is the thing that is sending data to the backend
                
                  dispatch(authActions.login())
